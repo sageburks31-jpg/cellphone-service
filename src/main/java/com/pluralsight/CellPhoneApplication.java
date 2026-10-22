@@ -16,12 +16,57 @@ public class CellPhoneApplication {
 
     public static void startMenu(){
         print("""
+                
+                *==== Main Phone Menu ====*
+                
                 enter (S)earch to get users cellphone data
                 enter (E)nd to end program
                 enter (A)dd to add new cellphone data
+                
                 """+String.format("%n"));
-        print("Please enter your response here->: "+scanner.nextLine());
+        print("Please enter your response here->: ");
+        String stringInput=scanner.nextLine().toLowerCase();
+        switch (stringInput){
+            case ("s"),("search")->{searchPhoneMenu();}
+            case ("end"), ("e") -> {print("program has ended");}
+            case ("a"),("add")->{}
+            default -> {
+                print(String.format("Please enter a valid Input %n"));
+                startMenu();
+            }
+        }
     }
+
+    public static void searchPhoneMenu(){
+        print("""
+                
+                *==== Search Phone Menu ====*
+                
+                enter (SN) to search for serial number
+                enter (MD) to search for phone model
+                enter (CR) to search for carrier
+                enter (PN) to search for phone number
+                enter (ON) to search for name of phone holder
+                enter (R)eturn to return to main menu
+                
+                """+String.format("%n"));
+        print("Please enter your response here->: ");
+        String stringInput=scanner.nextLine().toLowerCase();
+        switch (stringInput){
+            case ("r"), ("return") -> {startMenu();}
+            case ("sn") -> {}
+            case ("md") -> {}
+            case ("cr") -> {}
+            case ("pn") -> {}
+            case ("on") -> {}
+            default -> {
+                print(String.format("Please enter a valid Input %n"));
+                searchPhoneMenu();
+            }
+        }
+    }
+
+
 
     public static void print(String printString){
         System.out.print(printString);
