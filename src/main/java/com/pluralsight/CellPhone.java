@@ -8,12 +8,12 @@ public class CellPhone {
     private String phoneNumber = "";
     private String owner = "";
 
-    public void setAllPhoneStats(int SN, String md, String carr, String PN, String ownerName){
+    public void setAllPhoneStats(int SN, String md, String carr, String PN, String ON){
         this.serialNumber=SN;
         this.model=md;
         this.carrier=carr;
         this.phoneNumber=PN;
-        this.owner=ownerName;
+        this.owner=ON;
     }
 
     public void setSinglePhoneStat(int statKey, String setValue){
