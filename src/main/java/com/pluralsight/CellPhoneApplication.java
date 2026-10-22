@@ -3,9 +3,12 @@ package com.pluralsight;
 import java.util.*;
 
 public class CellPhoneApplication {
-    static Scanner scanner =new Scanner(System.in);
+
+    static Scanner scanner = new Scanner(System.in);
+
     static String[] questionList={"What is the serial number?","What model is the phone?",
             "Who is the carrier?", "What is the phone number?", "Who is the owner of the phone?"};
+
     static List<CellPhone> cellPhoneList=new ArrayList<>();
 
     public static void main(String[] args) {
@@ -23,13 +26,12 @@ public class CellPhoneApplication {
                 enter (E)nd to end program
                 enter (A)dd to add new cellphone data
                 
-                """+String.format("%n"));
-        print("Please enter your response here->: ");
+                Please enter your response here->:"""+" ");
         String stringInput=scanner.nextLine().toLowerCase();
         switch (stringInput){
             case ("s"),("search")->{searchPhoneMenu();}
             case ("end"), ("e") -> {print("program has ended");}
-            case ("a"),("add")->{}
+            case ("a"),("add") -> {}
             default -> {
                 print(String.format("Please enter a valid Input %n"));
                 startMenu();
@@ -49,8 +51,7 @@ public class CellPhoneApplication {
                 enter (ON) to search for name of phone holder
                 enter (R)eturn to return to main menu
                 
-                """+String.format("%n"));
-        print("Please enter your response here->: ");
+                Please enter your response here->:"""+" ");
         String stringInput=scanner.nextLine().toLowerCase();
         switch (stringInput){
             case ("r"), ("return") -> {startMenu();}
@@ -66,7 +67,9 @@ public class CellPhoneApplication {
         }
     }
 
+    public static void addPhoneMenu(){
 
+    }
 
     public static void print(String printString){
         System.out.print(printString);
@@ -76,9 +79,9 @@ public class CellPhoneApplication {
             print(questionList[i]+" "+cellPhoneList.get(cellPhoneIndex).getSinglePhoneStat(i)+String.format("%n"));
         }
     }
-    public static void setAllPhoneStats(int SN, String md, String carr, String PN, String ON){
+    public static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
         CellPhone cellPhone = new CellPhone();
-        cellPhone.setAllPhoneStats(SN, md, carr ,PN, ON);
+        cellPhone.setAllPhoneStats(SN, md, CR ,PN, ON);
         cellPhoneList.add(cellPhone);
         printPhoneStats(cellPhoneList.size()-1);
     }
