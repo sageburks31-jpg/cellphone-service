@@ -187,7 +187,7 @@ public class CellPhoneApplication {
         }
     }
 
-    private static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
+    public static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
         CellPhone cellPhone = new CellPhone();
         cellPhone.setAllPhoneStats(SN, md, CR ,PN, ON);
         cellPhoneList.add(cellPhone);
