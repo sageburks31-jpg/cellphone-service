@@ -26,6 +26,7 @@ public class CellPhoneApplication {
                 enter (S)earch to get users cellphone data.
                 enter (E)nd to end program.
                 enter (A)dd to add new cellphone data.
+                enter (D)ial to call a registered phone number
                 
                 Please enter your response here->:""" + " ");
 
@@ -35,11 +36,16 @@ public class CellPhoneApplication {
             case ("s"), ("search") -> searchPhoneMenu();
             case ("e"), ("end") -> print("program has ended");
             case ("a"), ("add") -> addPhoneMenu();
+            case ("d"), ("dial") -> {}
             default -> {
                 print(String.format("Please enter a valid Input %n"));
                 startMenu();
             }
         }
+    }
+
+    private static void dialPhoneMenu(){
+
     }
 
     public static void searchPhoneMenu(){
@@ -74,15 +80,27 @@ public class CellPhoneApplication {
 
     public static void phoneSearcher(int statKey){
         print("please enter " + phoneStatList[statKey] + " here ->: ");
-        String enteredPhoneStat = scanner.nextLine();
-        int forloopindex;
 
-        for (forloopindex = 0; forloopindex <= cellPhoneList.size() - 1; forloopindex++){
-            if (cellPhoneList.get(forloopindex).getSinglePhoneStat(forloopindex).equals(enteredPhoneStat)){
+        boolean foundPhone = false;
+        String enteredPhoneStat = scanner.nextLine().trim();
+        int forloopindex=0;
+
+        for (CellPhone cellPhone: cellPhoneList){
+            if (cellPhone.getSinglePhoneStat(statKey).equals(enteredPhoneStat)){
+                print(String.format("""
+                
+                *==== Found %ss Phone ====*
+                
+                """,cellPhone.getSinglePhoneStat(forloopindex)));
+                printPhoneStats(forloopindex);
+                foundPhone=true;
                 break;
             }
+            forloopindex++;
         }
-        printPhoneStats(forloopindex);
+        if (!foundPhone){
+            print(" *==== Phone Not Found ====* ");
+        }
         searcherRequestMenu();
     }
 
