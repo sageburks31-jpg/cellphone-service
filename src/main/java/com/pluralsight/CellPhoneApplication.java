@@ -6,15 +6,15 @@ public class CellPhoneApplication {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static String[] questionList={"What is the serial number?","What model is the phone?",
+    static String[] questionList={"What is the serial number?", "What model is the phone?",
             "Who is the carrier?", "What is the phone number?", "Who is the owner of the phone?"};
-    static String[] phoneStatList={"serial number","phone model","carrier","phone number","phone holder"};
+    static String[] phoneStatList={"serial number", "phone model", "carrier", "phone number", "phone holder"};
 
     static List<CellPhone> cellPhoneList=new ArrayList<>();
 
     public static void main(String[] args) {
         setAllPhoneStats(1001010, "iPhone 15 Pro Max",
-                "Verizon","(555) 123-4567","unKnown");
+                "Verizon", "(555) 123-4567", "unKnown");
         startMenu();
     }
 
@@ -27,9 +27,11 @@ public class CellPhoneApplication {
                 enter (E)nd to end program.
                 enter (A)dd to add new cellphone data.
                 
-                Please enter your response here->:"""+" ");
-        String stringInput=scanner.nextLine().toLowerCase();
-        switch (stringInput){
+                Please enter your response here->:""" + " ");
+
+        String stringInput = scanner.nextLine().toLowerCase();
+
+        switch (stringInput) {
             case ("s"), ("search") -> searchPhoneMenu();
             case ("e"), ("end") -> print("program has ended");
             case ("a"), ("add") -> addPhoneMenu();
@@ -53,7 +55,9 @@ public class CellPhoneApplication {
                 enter (R)eturn to return to main menu.
                 
                 Please enter your response here->:"""+" ");
-        String stringInput=scanner.nextLine().toLowerCase();
+
+        String stringInput = scanner.nextLine().toLowerCase();
+
         switch (stringInput){
             case ("r"), ("return") -> startMenu();
             case ("sn"), ("serial number") -> phoneSearcher(0);
@@ -70,10 +74,10 @@ public class CellPhoneApplication {
 
     public static void phoneSearcher(int statKey){
         print("please enter " + phoneStatList[statKey] + " here ->: ");
-        String enteredPhoneStat=scanner.nextLine();
+        String enteredPhoneStat = scanner.nextLine();
         int forloopindex;
 
-        for (forloopindex = 0; forloopindex <= cellPhoneList.size() - 1; forloopindex++ ){
+        for (forloopindex = 0; forloopindex <= cellPhoneList.size() - 1; forloopindex++){
             if (cellPhoneList.get(forloopindex).getSinglePhoneStat(forloopindex).equals(enteredPhoneStat)){
                 break;
             }
@@ -83,7 +87,27 @@ public class CellPhoneApplication {
     }
 
     public static void searcherRequestMenu(){
+        print("""
+                
+                *==== Phone Searcher Menu ====*
+                
+                enter (S)earch to search for another cellphone.
+                enter (E)nd to end program.
+                enter (R)eturn to return to main menu.
+                
+                Please enter your response here->:"""+" ");
 
+        String stringInput = scanner.nextLine().toLowerCase();
+
+        switch (stringInput) {
+            case ("s"), ("search") -> searchPhoneMenu();
+            case ("e"), ("end") -> print("program has ended");
+            case ("r"), ("add") -> startMenu();
+            default -> {
+                print(String.format("Please enter a valid Input %n"));
+                searcherRequestMenu();
+            }
+        }
     }
 
     public static void addPhoneMenu(){
@@ -98,11 +122,11 @@ public class CellPhoneApplication {
 
         for (int i = 0; i <= 4; i++) {
             print(questionList[i] + String.format("%n | enter here ->: "));
-            String answerInput=scanner.nextLine();
-            String answerCheckString=answerInput.toLowerCase();
+            String answerInput = scanner.nextLine();
+            String answerCheckString = answerInput.toLowerCase();
 
-            if (answerCheckString.equals("c")||answerCheckString.equals("cancel")){
-                hasCansel=true;
+            if (answerCheckString.equals("c") || answerCheckString.equals("cancel")){
+                hasCansel = true;
                 break;
             } else {cellPhone.setSinglePhoneStat(i, answerInput);}
         }
@@ -119,7 +143,7 @@ public class CellPhoneApplication {
 
     public static void printPhoneStats(int cellPhoneIndex){
         for (int i = 0; i <= 4; i++) {
-            print(questionList[i]+" "+cellPhoneList.get(cellPhoneIndex).getSinglePhoneStat(i)+String.format("%n"));
+            print(questionList[i] + " " + cellPhoneList.get(cellPhoneIndex).getSinglePhoneStat(i) + String.format("%n"));
         }
     }
 
@@ -127,6 +151,6 @@ public class CellPhoneApplication {
         CellPhone cellPhone = new CellPhone();
         cellPhone.setAllPhoneStats(SN, md, CR ,PN, ON);
         cellPhoneList.add(cellPhone);
-        printPhoneStats(cellPhoneList.size()-1);
+        printPhoneStats(cellPhoneList.size() - 1);
     }
 }
