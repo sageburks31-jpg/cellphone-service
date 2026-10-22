@@ -8,6 +8,7 @@ public class CellPhoneApplication {
 
     static String[] questionList={"What is the serial number?","What model is the phone?",
             "Who is the carrier?", "What is the phone number?", "Who is the owner of the phone?"};
+    static String[] phoneStatList={"serial number","phone model","carrier","phone number","phone holder"};
 
     static List<CellPhone> cellPhoneList=new ArrayList<>();
 
@@ -68,7 +69,15 @@ public class CellPhoneApplication {
     }
 
     public static void phoneSearcher(int statKey){
-
+        print("please enter "+phoneStatList[statKey]+" here ->: ");
+        String enteredPhoneStat=scanner.nextLine();
+        int forloopindex;
+        for (forloopindex=0;forloopindex<=cellPhoneList.size()-1;forloopindex++){
+            if (cellPhoneList.get(forloopindex).getSinglePhoneStat(forloopindex).equals(enteredPhoneStat)){
+                break;
+            }
+        }
+        printPhoneStats(forloopindex);
     }
 
     public static void addPhoneMenu(){
