@@ -69,15 +69,21 @@ public class CellPhoneApplication {
     }
 
     public static void phoneSearcher(int statKey){
-        print("please enter "+phoneStatList[statKey]+" here ->: ");
+        print("please enter " + phoneStatList[statKey] + " here ->: ");
         String enteredPhoneStat=scanner.nextLine();
         int forloopindex;
-        for (forloopindex=0;forloopindex<=cellPhoneList.size()-1;forloopindex++){
+
+        for (forloopindex = 0; forloopindex <= cellPhoneList.size() - 1; forloopindex++ ){
             if (cellPhoneList.get(forloopindex).getSinglePhoneStat(forloopindex).equals(enteredPhoneStat)){
                 break;
             }
         }
         printPhoneStats(forloopindex);
+        searcherRequestMenu();
+    }
+
+    public static void searcherRequestMenu(){
+
     }
 
     public static void addPhoneMenu(){
