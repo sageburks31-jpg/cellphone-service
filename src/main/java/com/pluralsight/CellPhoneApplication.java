@@ -22,16 +22,16 @@ public class CellPhoneApplication {
                 
                 *==== Main Phone Menu ====*
                 
-                enter (S)earch to get users cellphone data
-                enter (E)nd to end program
-                enter (A)dd to add new cellphone data
+                enter (S)earch to get users cellphone data.
+                enter (E)nd to end program.
+                enter (A)dd to add new cellphone data.
                 
                 Please enter your response here->:"""+" ");
         String stringInput=scanner.nextLine().toLowerCase();
         switch (stringInput){
-            case ("s"),("search")->{searchPhoneMenu();}
-            case ("end"), ("e") -> {print("program has ended");}
-            case ("a"),("add") -> {}
+            case ("s"), ("search") -> searchPhoneMenu();
+            case ("e"), ("end") -> print("program has ended");
+            case ("a"), ("add") -> addPhoneMenu();
             default -> {
                 print(String.format("Please enter a valid Input %n"));
                 startMenu();
@@ -44,22 +44,22 @@ public class CellPhoneApplication {
                 
                 *==== Search Phone Menu ====*
                 
-                enter (SN) to search for serial number
-                enter (MD) to search for phone model
-                enter (CR) to search for carrier
-                enter (PN) to search for phone number
-                enter (ON) to search for name of phone holder
-                enter (R)eturn to return to main menu
+                enter (SN) to search for serial number.
+                enter (MD) to search for phone model.
+                enter (CR) to search for carrier.
+                enter (PN) to search for phone number.
+                enter (ON) to search for name of phone holder.
+                enter (R)eturn to return to main menu.
                 
                 Please enter your response here->:"""+" ");
         String stringInput=scanner.nextLine().toLowerCase();
         switch (stringInput){
-            case ("r"), ("return") -> {startMenu();}
-            case ("sn") -> {}
-            case ("md") -> {}
-            case ("cr") -> {}
-            case ("pn") -> {}
-            case ("on") -> {}
+            case ("r"), ("return") -> startMenu();
+            case ("sn"), ("serial number") -> phoneSearcher(0);
+            case ("md"), ("phone model") -> phoneSearcher(1);
+            case ("cr"), ("carrier") -> phoneSearcher(2);
+            case ("pn"), ("phone number") -> phoneSearcher(3);
+            case ("on"), ("phone holder") -> phoneSearcher(4);
             default -> {
                 print(String.format("Please enter a valid Input %n"));
                 searchPhoneMenu();
@@ -67,18 +67,47 @@ public class CellPhoneApplication {
         }
     }
 
-    public static void addPhoneMenu(){
+    public static void phoneSearcher(int statKey){
 
+    }
+
+    public static void addPhoneMenu(){
+        boolean hasCansel = false;
+        CellPhone cellPhone = new CellPhone();
+        print("""
+                
+                *==== Add Phone Menu ====*
+                
+                enter (C)ancel to cancel and return to Main Menu.
+                """);
+
+        for (int i = 0; i <= 4; i++) {
+            print(questionList[i] + String.format("%n | enter here ->: "));
+            String answerInput=scanner.nextLine();
+            String answerCheckString=answerInput.toLowerCase();
+
+            if (answerCheckString.equals("c")||answerCheckString.equals("cancel")){
+                hasCansel=true;
+                break;
+            } else {cellPhone.setSinglePhoneStat(i, answerInput);}
+        }
+        if (!hasCansel) {
+            cellPhoneList.add(cellPhone);
+            printPhoneStats(cellPhoneList.size() - 1);
+            startMenu();
+        } else {startMenu();}
     }
 
     public static void print(String printString){
         System.out.print(printString);
     }
+
     public static void printPhoneStats(int cellPhoneIndex){
         for (int i = 0; i <= 4; i++) {
             print(questionList[i]+" "+cellPhoneList.get(cellPhoneIndex).getSinglePhoneStat(i)+String.format("%n"));
         }
     }
+
     public static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
         CellPhone cellPhone = new CellPhone();
         cellPhone.setAllPhoneStats(SN, md, CR ,PN, ON);
