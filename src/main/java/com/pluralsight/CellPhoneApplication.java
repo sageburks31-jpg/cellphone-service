@@ -6,11 +6,11 @@ public class CellPhoneApplication {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static String[] questionList={"What is the serial number?", "What model is the phone?",
+    static String[] questionList = {"What is the serial number?", "What model is the phone?",
             "Who is the carrier?", "What is the phone number?", "Who is the owner of the phone?"};
-    static String[] phoneStatList={"serial number", "phone model", "carrier", "phone number", "phone holder"};
+    static String[] phoneStatList = {"serial number", "phone model", "carrier", "phone number", "phone holder"};
 
-    static List<CellPhone> cellPhoneList=new ArrayList<>();
+    static List<CellPhone> cellPhoneList = new ArrayList<>();
 
     public static void main(String[] args) {
         setAllPhoneStats(1001010, "iPhone 15 Pro Max",
@@ -18,7 +18,7 @@ public class CellPhoneApplication {
         startMenu();
     }
 
-    public static void startMenu(){
+    private static void startMenu(){
         print("""
                 
                 *==== Main Phone Menu ====*
@@ -36,7 +36,7 @@ public class CellPhoneApplication {
             case ("s"), ("search") -> searchPhoneMenu();
             case ("e"), ("end") -> print("program has ended");
             case ("a"), ("add") -> addPhoneMenu();
-            case ("d"), ("dial") -> {}
+            case ("d"), ("dial") -> dialPhoneMenu();
             default -> {
                 print(String.format("Please enter a valid Input %n"));
                 startMenu();
@@ -45,10 +45,32 @@ public class CellPhoneApplication {
     }
 
     private static void dialPhoneMenu(){
+        print("please enter phone here ->: ");
 
+        boolean foundPhone = false;
+        String enteredPhoneStat = scanner.nextLine().trim();
+        int forloopindex=0;
+
+        for (CellPhone cellPhone: cellPhoneList){
+            if (cellPhone.getSinglePhoneStat(3).equals(enteredPhoneStat)){
+                print(String.format("""
+                
+                *==== calling %ss Phone ====*
+                
+                """,cellPhone.getSinglePhoneStat(3)));
+                printPhoneStats(forloopindex);
+                foundPhone = true;
+                break;
+            }
+            forloopindex++;
+        }
+        if (!foundPhone){
+            print(" *==== this number does Not Exist ====* ");
+            startMenu();
+        }
     }
 
-    public static void searchPhoneMenu(){
+    private static void searchPhoneMenu(){
         print("""
                 
                 *==== Search Phone Menu ====*
@@ -78,7 +100,7 @@ public class CellPhoneApplication {
         }
     }
 
-    public static void phoneSearcher(int statKey){
+    private static void phoneSearcher(int statKey){
         print("please enter " + phoneStatList[statKey] + " here ->: ");
 
         boolean foundPhone = false;
@@ -91,9 +113,9 @@ public class CellPhoneApplication {
                 
                 *==== Found %ss Phone ====*
                 
-                """,cellPhone.getSinglePhoneStat(forloopindex)));
+                """,cellPhone.getSinglePhoneStat(statKey)));
                 printPhoneStats(forloopindex);
-                foundPhone=true;
+                foundPhone = true;
                 break;
             }
             forloopindex++;
@@ -104,7 +126,7 @@ public class CellPhoneApplication {
         searcherRequestMenu();
     }
 
-    public static void searcherRequestMenu(){
+    private static void searcherRequestMenu(){
         print("""
                 
                 *==== Phone Searcher Menu ====*
@@ -128,7 +150,7 @@ public class CellPhoneApplication {
         }
     }
 
-    public static void addPhoneMenu(){
+    private static void addPhoneMenu(){
         boolean hasCansel = false;
         CellPhone cellPhone = new CellPhone();
         print("""
@@ -155,17 +177,17 @@ public class CellPhoneApplication {
         } else {startMenu();}
     }
 
-    public static void print(String printString){
+    private static void print(String printString){
         System.out.print(printString);
     }
 
-    public static void printPhoneStats(int cellPhoneIndex){
+    private static void printPhoneStats(int cellPhoneIndex){
         for (int i = 0; i <= 4; i++) {
             print(questionList[i] + " " + cellPhoneList.get(cellPhoneIndex).getSinglePhoneStat(i) + String.format("%n"));
         }
     }
 
-    public static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
+    private static void setAllPhoneStats(int SN, String md, String CR, String PN, String ON){
         CellPhone cellPhone = new CellPhone();
         cellPhone.setAllPhoneStats(SN, md, CR ,PN, ON);
         cellPhoneList.add(cellPhone);

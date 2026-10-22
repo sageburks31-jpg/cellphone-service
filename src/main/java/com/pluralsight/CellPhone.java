@@ -9,11 +9,11 @@ public class CellPhone {
     private String owner = "";
 
     public void setAllPhoneStats(int SN, String MD, String CR, String PN, String ON){
-        this.serialNumber=SN;
-        this.model=MD;
-        this.carrier=CR;
-        this.phoneNumber=PN;
-        this.owner=ON;
+        this.serialNumber = SN;
+        this.model = MD;
+        this.carrier = CR;
+        this.phoneNumber = PN;
+        this.owner = ON;
     }
 
     public void setSinglePhoneStat(int statKey, String setValue){
